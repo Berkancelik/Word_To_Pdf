@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Word_To_Pdf_Producer", "Word_To_Pdf_Producer\Word_To_Pdf_Producer.csproj", "{C73E88F9-67D9-40E5-8BB7-3F16BD8CFACF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C73E88F9-67D9-40E5-8BB7-3F16BD8CFACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73E88F9-67D9-40E5-8BB7-3F16BD8CFACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73E88F9-67D9-40E5-8BB7-3F16BD8CFACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73E88F9-67D9-40E5-8BB7-3F16BD8CFACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0E4E3AB-70FB-4BC5-BA85-5D3C60876813}
+	EndGlobalSection
+EndGlobal
