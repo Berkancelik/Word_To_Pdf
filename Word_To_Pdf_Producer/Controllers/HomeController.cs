@@ -30,10 +30,9 @@ namespace Word_To_Pdf_Producer.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult WordToPdfPage(WordToPdf wordToPdf)
+        [HttpPost]      
+        public IActionResult WordToPdf(WordToPdf wordToPdf)
         {
-
             var factory = new ConnectionFactory();
 
             factory.Uri = new Uri(configuration["ConnectionStrings:RabbitMQCloudString"]);
@@ -50,10 +49,10 @@ namespace Word_To_Pdf_Producer.Controllers
 
                     MessageWordToPdf messageWordToPdf = new MessageWordToPdf();
 
-                    using (MemoryStream ms =new  MemoryStream())
+                    using (MemoryStream ms = new MemoryStream())
                     {
                         wordToPdf.WordFile.CopyTo(ms);
-                        messageWordToPdf.WordByte= ms.ToArray();
+                        messageWordToPdf.WordByte = ms.ToArray();
                     }
 
                     messageWordToPdf.Email = wordToPdf.Email;
@@ -76,9 +75,7 @@ namespace Word_To_Pdf_Producer.Controllers
                 }
 
             }
-
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -89,5 +86,6 @@ namespace Word_To_Pdf_Producer.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+      
     }
 }
