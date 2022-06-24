@@ -1,9 +1,12 @@
 ﻿@model WordToPdf
+
 @{
     ViewData["Title"] = "WordToPdfPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>WordToPdfPage</h1>
+<h2>@ViewBag.result</h2>
 
 <div class="row">
     <div class="col-md-400">
@@ -24,3 +27,4 @@
         </form>
     </div>
 </div>
+
