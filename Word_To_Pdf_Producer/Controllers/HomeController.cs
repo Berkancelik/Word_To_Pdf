@@ -23,6 +23,12 @@ namespace Word_To_Pdf_Producer.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult WordToPdfPage(WordToPdf wordToPdf)
+        {
+            return View(wordToPdf);
+        }
+
         public IActionResult Privacy()
         {
             return View();
