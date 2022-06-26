@@ -71,7 +71,6 @@ namespace Word_To_Pdf_Producer.Controllers
                     ViewBag.result = "Word dosyanız pdf dosyasına dönüştürüldükten sonra size email olarak gönderilecektir.";
 
                     return View();
-
                 }
 
             }
