@@ -29,19 +29,27 @@ namespace Word_to_Pdf.Consumer
                 SmtpClient smtpClient = new SmtpClient();
 
                 mailMessage.From = new MailAddress("berkancelikist@gmail.com");
+
                 mailMessage.To.Add(email);
+
                 mailMessage.Subject = "Pdf Dosyaso olulturma | nokta.com";
+
                 mailMessage.Body = "pdf dosyanız ektedir";
+
                 mailMessage.IsBodyHtml = true;
+
                 mailMessage.Attachments.Add(attach);
 
                 smtpClient.Host = "mail.orneksite.com";
+
                 smtpClient.Port = 587;
 
                 smtpClient.Credentials = new System.Net.NetworkCredential("admin@orneksite.com", "Parola");
 
                 Console.WriteLine($"Sonuç: {email} adresine gönderilmiştir");
+
                 memoryStream.Close();
+
                 memoryStream.Dispose();
                 return true;
             }
@@ -64,6 +72,7 @@ namespace Word_to_Pdf.Consumer
             {
                 using (var channel = connection.CreateModel())
                 {
+
                     channel.ExchangeDeclare("convert-exchange", ExchangeType.Direct, true, false, null);
 
                     channel.QueueBind(queue: "File", exchange: "convert-exchange", null);
@@ -90,8 +99,6 @@ namespace Word_to_Pdf.Consumer
                             throw;
                         }
                     };
-
-
 
                 }
             }
