@@ -56,6 +56,7 @@ namespace Word_To_Pdf_Producer.Controllers
                     }
 
                     messageWordToPdf.Email = wordToPdf.Email;
+
                     messageWordToPdf.FileName = Path.GetFileNameWithoutExtension(wordToPdf.WordFile.FileName);
 
                     string serializeMessage = JsonConvert.SerializeObject(messageWordToPdf);
