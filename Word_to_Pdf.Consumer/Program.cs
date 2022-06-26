@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Spire.Doc;
 using System;
 using System.IO;
 using System.Net.Mail;
-using System.Reflection.Metadata;
 using System.Text;
 
 namespace Word_to_Pdf.Consumer
@@ -46,6 +46,8 @@ namespace Word_to_Pdf.Consumer
 
                 smtpClient.Credentials = new System.Net.NetworkCredential("admin@orneksite.com", "Parola");
 
+                smtpClient.Send(mailMessage);
+
                 Console.WriteLine($"Sonuç: {email} adresine gönderilmiştir");
 
                 memoryStream.Close();
@@ -64,6 +66,7 @@ namespace Word_to_Pdf.Consumer
 
         static void Main(string[] args)
         {
+            bool result = false;
             var factory = new ConnectionFactory();
 
             factory.Uri = new Uri("amqps://dhqyhvke:5ukMea46fWrkSxEq53cPQxBqr9N92sEQ@moose.rmq.cloudamqp.com/dhqyhvke");
@@ -75,7 +78,7 @@ namespace Word_to_Pdf.Consumer
 
                     channel.ExchangeDeclare("convert-exchange", ExchangeType.Direct, true, false, null);
 
-                    channel.QueueBind(queue: "File", exchange: "convert-exchange", null);
+                    channel.QueueBind(queue: "File", exchange: "convert-exchange","WordToPdf");
 
                     channel.BasicQos(0, 1, false);
 
@@ -92,9 +95,26 @@ namespace Word_to_Pdf.Consumer
                             Document document = new Document();
                             string message = Encoding.UTF8.GetString(ea.Body);
                             MessageWordToPdf messageWordToPdf = JsonConvert.DeserializeObject<MessageWordToPdf>(message);
+                            document.LoadFromStream(new MemoryStream(messageWordToPdf.WordByte), FileFormat.Docx2013);
+
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                document.SaveToStream(ms, FileFormat.PDF);
+
+                                result = EmailSend(messageWordToPdf.Email, ms, messageWordToPdf.FileName);
+
+                            }
+
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            Console.WriteLine("Hata meydana geldi:" + ex.Message);
+
+                            if (result)
+                            {
+                                Console.WriteLine("Kutuktan mesaj başarılı şekilde işlendi...");
+                                channel.BasicAck(ea.DeliveryTag, false);
+                            };
 
                             throw;
                         }
